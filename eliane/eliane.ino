@@ -2,10 +2,10 @@
    eliane is based on eighties_dystopia.ino, 27 Dec 2021 - @todbot
    12 March 2022 - @ef1j95
 
-    Original details: 
-    - A swirling ominous wub that evolves over time
+    Details: 
+    - Originally a swirling ominous wub that evolves over time
     - Running on Teensy 3.2 using ADC pin 14
-    - As with orignial, no user input, just wallow in the sound
+    - As with orignial, no user input
 
     Circuit for this implementation:
     - A14/DAC to tip of TRS audio jack (L)
@@ -17,7 +17,8 @@
     - A low-pass filter is slowly modulated over the filters
     - The filter modulation rate also changes randomly about every second
     - Every 52.5 seconds, a new note is randomly chosen from the allowed note list
-    - The new note is slowly mixed in with the old note
+    - The new note is slowly mixed in with the old note as it is faded out
+    - 100% hack
 
 */
 #include <MozziGuts.h>
