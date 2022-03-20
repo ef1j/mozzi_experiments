@@ -48,8 +48,8 @@ uint8_t resonance = 170; // range 0-255, 255 is most resonant
 //uint8_t notes[] = {33, 34, 31}; // possible notes to play MIDI A1, A1#, G1
 uint8_t notes[] = {33, 34, 31, 32, 35, 36, 37, 38, 39, 40, 41, 42, 43}; // the whole octave from G1 to G2
 uint32_t note_duration = 17500*3;
-uint8_t note2_id = notes[0];
-uint8_t note1_id = notes[0];
+uint8_t note2_id = 0;
+uint8_t note1_id = 0;
 uint32_t lastMillis = 0;
 uint32_t slidelen = 17;
 uint32_t slide = AUDIO_RATE*slidelen;
@@ -72,10 +72,12 @@ void loop() {
 void setNotes() {
   float fo = mtof(notes[note1_id]);
   float fn = mtof(notes[note2_id]);
+  aOsc1.setFreq( fo );
   aOsc2.setFreq( fo + (float)rand(100) / 100); // orig 1.001, 1.002, 1.004
   aOsc3.setFreq( fo + (float)rand(100) / 100);
   aOsc4.setFreq( fo + (float)rand(100) / 100);
   aOsc5.setFreq( (fo / 2) + (float)rand(100) / 1000);
+  aOsc10.setFreq( fn );
   aOsc6.setFreq( fn + (float)rand(100) / 100); // orig 1.001, 1.002, 1.004
   aOsc7.setFreq( fn + (float)rand(100) / 100);
   aOsc8.setFreq( fn + (float)rand(100) / 100);
@@ -142,6 +144,6 @@ int updateAudio() {
                        aOsc9.next())
                       );
   }
-   if (slide > 0) slide--;
+  if (slide > 0) slide--;
   return MonoOutput::fromAlmostNBit(11, asig);
 }
